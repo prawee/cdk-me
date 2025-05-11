@@ -35,3 +35,15 @@ export class DataStack extends Stack {
     }
 }
 ```
+
+### Launcher
+```bash
+nano src/infra/Launcher.ts
+```
+```bash
+import { App } from 'aws-cdk-lib';
+import { DataStack } from './stacks/DataStack';
+
+const app = new App();
+new DataStack(app, 'DataStack');
+```
