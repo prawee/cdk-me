@@ -17,5 +17,13 @@
   "bugs": {
     "url": "https://github.com/prawee/cdk-me/issues"
   },
-  "homepage": "https://github.com/prawee/cdk-me#readme"
+  "homepage": "https://github.com/prawee/cdk-me#readme",
+  "devDependencies": {
+    "@types/node": "^22.15.17",
+    "aws-cdk": "^2.1014.0",
+    "aws-cdk-lib": "^2.195.0",
+    "constructs": "^10.4.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
 }
