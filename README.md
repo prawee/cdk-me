@@ -12,9 +12,10 @@ npm init -y
 npm i -D aws-cdk aws-cdk-lib constructs typescript ts-node @types/node
 ```
 
-## Make logic
+## Make files for logic
 ```bash
 mkdir src
 mkdir src/infra
 touch src/infra/Launcher.ts
+mkdir src/infra/stacks
 ```
