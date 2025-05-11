@@ -140,3 +140,44 @@ cdk deploy --all
 ```bash
 cdk destroy --all --force
 ```
+
+## Make REST API
+### Clone from `DataStack` and update class name
+```bash
+cp src/infra/stacks/DataStack.ts src/infra/stacks/ApiStack.ts
+nano src/infra/stacks/ApiStack.ts
+```
+```bash
+import { Stack, StackProps } from 'aws-cdk-lib';
+import { Construct } from 'constructs';
+
+export class ApiStack extends Stack {
+    constructor(scope: Construct, id: string, props?: StackProps) {
+        super(scope, id, props);
+    }
+}
+```
+### Adding logic with `RestApi`
+- create `api` from RestApi
+- create root api
+- adding resource and integration lambda
+- update `props` via extends and new define with data integration
+
+```bash
+import { Stack, StackProps } from 'aws-cdk-lib';
+import { LambdaIntegration, RestApi } from 'aws-cdk-lib/aws-apigateway';
+import { Construct } from 'constructs';
+
+interface ApiStackProps extends StackProps {
+    helloLambdaIntegration: LambdaIntegration
+}
+export class ApiStack extends Stack {
+    constructor(scope: Construct, id: string, props: ApiStackProps) {
+        super(scope, id, props);
+
+        const api = new RestApi(this, 'DemoApi');
+        const demoResource = api.root.addResource('demo');
+        demoResource.addMethod('GET', props.helloLambdaIntegration);
+    }
+}
+```
