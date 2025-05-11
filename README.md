@@ -116,3 +116,16 @@ export class LambdaStack extends Stack {
     }
 }
 ```
+
+### Register service to app
+```bash
+nano src/infra/Launcher.ts
+```
+```bash
+...
+import { LambdaStack } from './stacks/LambdaStack';
+
+const app = new App();
+...
+new LambdaStack(app, 'LambdaStack');
+```
