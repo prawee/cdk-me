@@ -135,3 +135,8 @@ new LambdaStack(app, 'LambdaStack');
 cdk synth
 cdk deploy --all
 ```
+
+### Destroy
+```bash
+cdk destroy --all --force
+```
