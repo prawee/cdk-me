@@ -129,3 +129,9 @@ const app = new App();
 ...
 new LambdaStack(app, 'LambdaStack');
 ```
+
+## Deploy
+```bash
+cdk synth
+cdk deploy --all
+```
