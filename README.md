@@ -181,3 +181,31 @@ export class ApiStack extends Stack {
     }
 }
 ```
+
+### Update `LambdaStack` for support integration
+- update `func` with variable
+- create public `variable for integration` with `LambdaIntegration` type
+- using `variable of integration` with `func`
+
+```bash
+...
+import { LambdaIntegration } from 'aws-cdk-lib/aws-apigateway';
+...
+
+export class LambdaStack extends Stack {
+
+    public readonly helloLambdaIntegration: LambdaIntegration;
+    
+    constructor(scope: Construct, id: string, props?: StackProps) {
+        super(scope, id, props);
+
+        const helloLambda = new LambdaFunction(this, 'HelloLambda', {
+            runtime: Runtime.NODEJS_20_X,
+            handler: 'hello.main',
+            code: Code.fromAsset(join(__dirname, '../../services')),
+        });
+
+        this.helloLambdaIntegration = new LambdaIntegration(helloLambda);
+    }
+}
+```
