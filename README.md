@@ -47,3 +47,14 @@ import { DataStack } from './stacks/DataStack';
 const app = new App();
 new DataStack(app, 'DataStack');
 ```
+
+## Make `cdk` configure with `cdk.json`
+```bash
+touch cdk.json
+nano cdk.json
+```
+```bash
+{
+    "app": "npx ts-node src/infra/Launcher.ts"
+}
+```
