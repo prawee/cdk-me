@@ -58,3 +58,21 @@ nano cdk.json
     "app": "npx ts-node src/infra/Launcher.ts"
 }
 ```
+
+## Testing `Synth`
+```bash
+cdk synth
+```
+### If exist error `TypeError: Unknown file extension ".ts"`
+```bash
+touch tsconfig.json
+nano tsconfig.json
+```
+```bash
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es2022"
+    }
+}
+```
