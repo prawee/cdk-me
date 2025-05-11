@@ -76,3 +76,19 @@ nano tsconfig.json
     }
 }
 ```
+
+## Make Service
+### Create Lambda func
+```bash
+mkdir src/services
+touch src/services/hello.js
+nano src/services/hello.js
+```
+```bash
+exports.main = async function(event, context) {
+    return {
+        statusCode: 200,
+        body: JSON.stringify('Hello World from Lambda!')
+    }
+}
+```
