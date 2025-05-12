@@ -245,6 +245,7 @@ GET https://yagw0nmvu2.execute-api.ap-southeast-1.amazonaws.com/prod/demo
 - update `DataStack` using `DynamoDB` and export it
 - update `LambdaStack` with `DataStack` via environment
 - update `Launcher` with pass data from `DataStack` to `LambdaStack`
+- update lambda func with data
 
 ### Create `Utils` with `getSuffixFromStack` func
 ```bash
@@ -331,4 +332,17 @@ const lambdaStack = new LambdaStack(app, 'LambdaStack', {
     demoTable: dataStack.demoTable
 });
 ...
+```
+
+### Update lambda func with data
+```bash
+nano src/services/hello.js
+```
+```bash
+exports.main = async function(event, context) {
+    return {
+        statusCode: 200,
+        body: JSON.stringify(`Hello! I will read from ${process.env.TABLE_NAME}`)
+    }
+}
 ```
