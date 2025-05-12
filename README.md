@@ -239,3 +239,22 @@ nano demo.http
 #### Getting
 GET https://yagw0nmvu2.execute-api.ap-southeast-1.amazonaws.com/prod/demo
 ```
+
+## Using Table with `DynamoDB`
+- create `Utils` for suffix id
+- update `DataStack` using `DynamoDB`
+- using data with lambda
+
+### Create `Utils` with `getSuffixFromStack` func
+```bash
+touch src/infra/Utils.ts 
+```
+```bash
+import { Fn, Stack } from 'aws-cdk-lib';
+
+export function getSuffixFromStack(stack: Stack) {
+    const shortStackId = Fn.select(2, Fn.split('/', stack.stackId));
+    const suffix = Fn.select(4, Fn.split('-', shortStackId));
+    return suffix;
+}
+```
