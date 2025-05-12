@@ -195,7 +195,7 @@ import { LambdaIntegration } from 'aws-cdk-lib/aws-apigateway';
 export class LambdaStack extends Stack {
 
     public readonly helloLambdaIntegration: LambdaIntegration;
-    
+
     constructor(scope: Construct, id: string, props?: StackProps) {
         super(scope, id, props);
 
@@ -208,4 +208,23 @@ export class LambdaStack extends Stack {
         this.helloLambdaIntegration = new LambdaIntegration(helloLambda);
     }
 }
+```
+
+### Update `Launcher` with integration
+- create variable for `LambdaStack`
+- register `ApiStack` to app and set props with integration value
+
+```bash
+nano src/infra/Launcher.ts
+```
+```bash
+...
+import { ApiStack } from './stacks/ApiStack';
+
+const app = new App();
+...
+const lambdaStack = new LambdaStack(app, 'LambdaStack');
+new ApiStack(app, 'ApiStack', {
+    helloLambdaIntegration: lambdaStack.helloLambdaIntegration
+});
 ```
