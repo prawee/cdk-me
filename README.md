@@ -228,3 +228,14 @@ new ApiStack(app, 'ApiStack', {
     helloLambdaIntegration: lambdaStack.helloLambdaIntegration
 });
 ```
+
+## Make Testing
+```bash
+nano demo.http
+```
+```bash
+# Demo API
+
+#### Getting
+GET https://yagw0nmvu2.execute-api.ap-southeast-1.amazonaws.com/prod/demo
+```
