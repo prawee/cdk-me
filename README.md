@@ -244,6 +244,7 @@ GET https://yagw0nmvu2.execute-api.ap-southeast-1.amazonaws.com/prod/demo
 - create `Utils` for suffix id
 - update `DataStack` using `DynamoDB` and export it
 - update `LambdaStack` with `DataStack` via environment
+- update `Launcher` with pass data from `DataStack` to `LambdaStack`
 
 ### Create `Utils` with `getSuffixFromStack` func
 ```bash
@@ -317,4 +318,17 @@ export class LambdaStack extends Stack {
         this.helloLambdaIntegration = new LambdaIntegration(helloLambda);
     }
 }
+```
+
+### Update `Launcher` with pass data from `DataStack` to `LambdaStack`
+```bash
+nano src/infra/Launcher.ts
+```
+```bash
+...
+const dataStack = new DataStack(app, 'DataStack');
+const lambdaStack = new LambdaStack(app, 'LambdaStack', {
+    demoTable: dataStack.demoTable
+});
+...
 ```
