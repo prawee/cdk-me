@@ -243,7 +243,7 @@ GET https://yagw0nmvu2.execute-api.ap-southeast-1.amazonaws.com/prod/demo
 ## Using Table with `DynamoDB`
 - create `Utils` for suffix id
 - update `DataStack` using `DynamoDB` and export it
-- using data with lambda
+- update `LambdaStack` with `DataStack` via environment
 
 ### Create `Utils` with `getSuffixFromStack` func
 ```bash
@@ -284,6 +284,37 @@ export ... {
                 type: AttributeType.STRING
             }
         });
+    }
+}
+```
+
+### Update `LambdaStack` with `DataStack`
+```bash
+nano src/infra/stacks/LambdaStack.ts
+```
+```bash
+...
+import { ITable } from 'aws-cdk-lib/aws-dynamodb';
+
+interface LambdaStackProps extends StackProps {
+    demoTable: ITable
+}
+
+export class LambdaStack extends Stack {
+
+    public readonly helloLambdaIntegration: LambdaIntegration;
+    
+    constructor(scope: Construct, id: string, props: LambdaStackProps) {
+        super(scope, id, props);
+
+        const helloLambda = new LambdaFunction(this, 'HelloLambda', {
+            ...
+            environment: {
+                TABLE_NAME: props.demoTable.tableName
+            }
+        });
+
+        this.helloLambdaIntegration = new LambdaIntegration(helloLambda);
     }
 }
 ```
